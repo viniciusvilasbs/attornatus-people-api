@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -28,6 +30,7 @@ public class People {
 	@Column(nullable = false)
 	private String name;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
 	@Column(name = "birth_date", nullable = false)
 	private LocalDate birthDate;
 	
