@@ -11,7 +11,7 @@ public class AddressMapper {
 
 	public static Address toEntity(final CreateAddressRequest request) {
 		
-		Address address = new Address(
+		final Address address = new Address(
 					request.getStreetName(), 
 					request.getNumber(), 
 					request.getZipCode(), 

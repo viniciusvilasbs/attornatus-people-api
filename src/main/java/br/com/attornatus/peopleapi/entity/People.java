@@ -9,12 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "people")
@@ -28,7 +28,13 @@ public class People {
 	@Column(nullable = false)
 	private String name;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
 	@Column(name = "birth_date", nullable = false)
 	private LocalDate birthDate;
+
+	public People(final String name, final LocalDate birthDate) {
+		this.name = name;
+		this.birthDate = birthDate;
+	}
+	
+	
 }
