@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,31 +17,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.attornatus.peopleapi.entity.People;
 import br.com.attornatus.peopleapi.service.PeopleService;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("v1/people")
+@RequestMapping("/v1/peoples")
 public class PeopleController {
 
-	@Autowired
-	private PeopleService peopleService;
+	private final PeopleService peopleService;
 	
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<People> listAll() {
-		return peopleService.findAll();
-	}
-	
-	@GetMapping(path = "/{peopleId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public People findById(@PathVariable Long peopleId) {
-		return peopleService.findById(peopleId);
-	}
-	
-	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public People create(@RequestBody @Valid People people) { //melhorar o parametro para não usar a entidade!!!
 		return peopleService.create(people);
 	}
 	
-	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/{peopleId}")
+	public People findById(@PathVariable Long peopleId) {
+		return peopleService.findById(peopleId);
+	}
+	
+	@GetMapping
+	public List<People> listAll() {
+		return peopleService.findAll();
+	}
+	
+	@PutMapping
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<People> update(@PathVariable Long peopleId, @RequestBody People people) {
 		People updatedPerson = peopleService.findById(peopleId);

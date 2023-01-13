@@ -1,14 +1,12 @@
 package br.com.attornatus.peopleapi.entity;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -33,7 +31,4 @@ public class People {
 	@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
 	@Column(name = "birth_date", nullable = false)
 	private LocalDate birthDate;
-	
-	@OneToMany(mappedBy = "people")
-	private List<Address> addresses;
 }

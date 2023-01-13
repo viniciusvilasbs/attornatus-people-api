@@ -11,8 +11,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "address")
@@ -41,4 +43,20 @@ public class Address {
 	@ManyToOne
 	@JoinColumn(name = "people_id", nullable = false)
 	private People people;
+
+	public Address(
+				final String streetName, 
+				final int number, 
+				final String zipCode, 
+				final String city, 
+				final boolean main
+			) {
+		this.streetName = streetName;
+		this.number = number;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.main = main;
+	}
+	
+	
 }

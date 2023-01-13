@@ -19,7 +19,7 @@ public class AddressService {
 	private final PeopleService peopleService;
 	
 	@Transactional
-	public Address create(Address address, final Long peopleId) {
+	public Address create(final Long peopleId, Address address) {
 		People people = peopleService.findById(peopleId);
 		
 		address.setPeople(people);
