@@ -15,8 +15,7 @@ public class AddressMapper {
 					request.getStreetName(), 
 					request.getNumber(), 
 					request.getZipCode(), 
-					request.getCity(),
-					request.isMain()
+					request.getCity()
 				);
 		
 		return address;

@@ -9,5 +9,5 @@ public class CreateAddressRequest {
 	private final int number;
 	private final String zipCode;
 	private final String city;
-	private final boolean main;
+
 }

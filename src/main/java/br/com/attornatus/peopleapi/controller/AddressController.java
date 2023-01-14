@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,12 +36,20 @@ public class AddressController {
 	}
 	
 	@GetMapping
-	public List<AddressResponse> findByPeopleId(@PathVariable Long peopleId) {
+	public ResponseEntity<List<AddressResponse>> findByPeopleId(@PathVariable Long peopleId) {
 		
 		final List<Address> addresses = addressService.findAllByPeopleId(peopleId);
 		
 		final List<AddressResponse> responses =  AddressMapper.toResponse(addresses);
 		
-		return responses;
+		return ResponseEntity.ok(responses);
+	}
+	
+	@PutMapping(path = "/{addressId}")
+	public ResponseEntity<Void> updateMainAddress(@PathVariable Long peopleId, @PathVariable Long addressId) {
+		
+		addressService.updateMainAddress(peopleId, addressId);
+		
+		return ResponseEntity.ok().build();
 	}
 }

@@ -24,10 +24,33 @@ public class AddressService {
 		
 		address.setPeople(people);
 		
+		if(findAllByPeopleId(peopleId).isEmpty()) {
+			address.setMain(true);
+		}
+		
 		return addressRepository.save(address);
 	}
 	
 	public List<Address> findAllByPeopleId(final Long peopleId) {
 		return addressRepository.findAllByPeopleId(peopleId);
+	}
+
+	public void updateMainAddress(final Long peopleId, final Long addressId) {
+		
+		if(peopleService.exist(peopleId)) {
+			List<Address> addresses = findAllByPeopleId(peopleId);
+			
+			addresses.forEach(address -> {
+				if(address.isMain()) {
+					address.setMain(false);
+				} else if(address.getId() == addressId) {
+					address.setMain(true);
+				}
+			});
+			
+			addressRepository.saveAll(addresses);
+		}
+		
+		
 	}
 }

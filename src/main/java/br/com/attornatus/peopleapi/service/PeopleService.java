@@ -41,7 +41,7 @@ public class PeopleService {
 		}
 	}
 	
-	private boolean exist(final Long id) {
+	public boolean exist(final Long id) {
 		return peopleRepository.existsById(id);
 	}
 }

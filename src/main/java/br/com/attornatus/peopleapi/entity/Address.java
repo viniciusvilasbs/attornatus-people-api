@@ -38,7 +38,7 @@ public class Address {
 	private String city;
 	
 	@Column
-	private boolean main;
+	private boolean main = false;
 	
 	@ManyToOne
 	@JoinColumn(name = "people_id", nullable = false)
@@ -48,14 +48,12 @@ public class Address {
 				final String streetName, 
 				final int number, 
 				final String zipCode, 
-				final String city, 
-				final boolean main
+				final String city
 			) {
 		this.streetName = streetName;
 		this.number = number;
 		this.zipCode = zipCode;
 		this.city = city;
-		this.main = main;
 	}
 	
 	
