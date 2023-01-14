@@ -17,20 +17,16 @@ import br.com.attornatus.peopleapi.controller.resource.PeopleResponse;
 import br.com.attornatus.peopleapi.entity.People;
 import br.com.attornatus.peopleapi.service.PeopleService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/peoples")
-@Slf4j
 public class PeopleController {
 
 	private final PeopleService peopleService;
 	
 	@PostMapping
 	public ResponseEntity<PeopleResponse> create(@RequestBody CreatePeopleRequest request) {
-		
-		log.info(request.toString());
 		
 		final People newPeople = peopleService.create(PeopleMapper.toEntity(request));
 		

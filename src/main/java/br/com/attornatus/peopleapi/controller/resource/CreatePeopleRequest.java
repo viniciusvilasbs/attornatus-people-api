@@ -2,7 +2,10 @@ package br.com.attornatus.peopleapi.controller.resource;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import lombok.Data;
 
@@ -11,6 +14,7 @@ public class CreatePeopleRequest {
 
 	private final String name;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
 	private final LocalDate birthDate;
 }
