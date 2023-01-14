@@ -30,9 +30,18 @@ public class PeopleService {
 	}
 	
 	@Transactional
-	public People update(final People people, final Long id) {
-		peopleRepository.findById(id);
+	public void update(final Long id, final People people) {
 		
-		return peopleRepository.save(people);
+		if(exist(id)) {
+			People storedPeople = findById(id);
+			storedPeople.setName(people.getName());
+			storedPeople.setBirthDate(people.getBirthDate());
+			
+			peopleRepository.save(storedPeople);
+		}
+	}
+	
+	private boolean exist(final Long id) {
+		return peopleRepository.existsById(id);
 	}
 }

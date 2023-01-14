@@ -59,16 +59,13 @@ public class PeopleController {
 		return ResponseEntity.ok(responses);
 	}
 	
-	@PutMapping
-	public ResponseEntity<People> update(@PathVariable Long peopleId, @RequestBody People people) {
-		People updatedPerson = peopleService.findById(peopleId);
+	@PutMapping(path = "/{peopleId}")
+	public ResponseEntity<Void> update(@PathVariable Long peopleId, @RequestBody CreatePeopleRequest request) {
 		
-		if(updatedPerson != null) {
-			updatedPerson = peopleService.update(people, peopleId);
-			
-			return ResponseEntity.ok(updatedPerson);
-		}
+		final People people = PeopleMapper.toEntity(request);
 		
-		return ResponseEntity.notFound().build();
+		peopleService.update(peopleId, people);
+		
+		return ResponseEntity.ok().build();
 	}
 }
